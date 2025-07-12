@@ -1,0 +1,7 @@
+.custom-toast {
+  font-size: 12px !important;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: #fff;
+  color: #333;
+}
