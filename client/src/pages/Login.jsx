@@ -6,6 +6,9 @@ import { data, useNavigate } from "react-router-dom";
 import { AppContent } from "../context/AppContext"; // Importing the context
 import axios from "axios";
 import { toast } from "react-toastify"; // Importing toast for notifications
+import facebook from "../assets/facebook.png";
+import gmail from "../assets/gmail.png";
+import github from "../assets/github.jpeg"; // Assuming you have a GitHub image in the assets folder
 const login = () => {
   const { backendUrl, isLoggedin, setIsLoggedin, getUserData, userData } =
     useContext(AppContent);
@@ -56,6 +59,18 @@ const login = () => {
   useEffect(() => {
     isLoggedin && userData && userData.isAccountVerified && navigate("/");
   }, [isLoggedin, userData]);
+
+  const handleGoogleLogin = () => {
+    window.open(`${backendUrl}/api/auth/google`, "_self");
+  };
+
+  const handleFacebookLogin = () => {
+    window.open(`${backendUrl}/api/auth/facebook`, "_self");
+  };
+
+  const handleGithubLogin = () => {
+    window.open(`${backendUrl}/api/auth/github`, "_self");
+  };
 
   return (
     <div className="flex justify-center items-center min-h-screen px-6 sm:px-0 bg-gradient-to-br from-blue-200 to-purple-400">
@@ -116,6 +131,26 @@ const login = () => {
             {state}
           </button>
         </form>
+        {state === "Sign up" && (
+          <div className="flex flex-col gap-3 mt-6">
+            <button
+              type="button"
+              onClick={handleGoogleLogin}
+              className="flex items-center justify-center gap-3 bg-white text-black py-2 rounded-full shadow hover:bg-gray-100 transition"
+            >
+              <img src={gmail} alt="Google" className="w-5 h-5" />
+              Continue with Google
+            </button>
+            <button
+              type="button"
+              onClick={handleGithubLogin}
+              className="flex items-center justify-center gap-3 bg-black text-white py-2 rounded-full shadow hover:bg-gray-800 transition"
+            >
+              <img src={github} alt="Google" className="w- h-5 rou" />
+              Continue with GitHub
+            </button>
+          </div>
+        )}
         {state === "Sign up" ? (
           <p className="text-center mt-4 text-xs text-gray-400">
             Already have account?{"  "}{" "}
